@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/samcontesse/gitlab-merge-request-resource"
-	"github.com/samcontesse/gitlab-merge-request-resource/common"
-	"github.com/samcontesse/gitlab-merge-request-resource/in"
+	"github.com/orion0616/gitlab-merge-request-resource-1"
+	"github.com/orion0616/gitlab-merge-request-resource-1/common"
+	"github.com/orion0616/gitlab-merge-request-resource-1/in"
 	"github.com/xanzy/go-gitlab"
 	"io/ioutil"
 	"net/url"
@@ -40,7 +40,7 @@ func main() {
 
 	mr.UpdatedAt = request.Version.UpdatedAt
 
-	target := createRepositoryUrl(api, mr.TargetProjectID, request.Source.PrivateToken)
+	// target := createRepositoryUrl(api, mr.TargetProjectID, request.Source.PrivateToken)
 	source := createRepositoryUrl(api, mr.SourceProjectID, request.Source.PrivateToken)
 
 	commit, _, err := api.Commits.GetCommit(mr.SourceProjectID, mr.SHA)
@@ -48,11 +48,11 @@ func main() {
 		common.Fatal("listing merge request commits", err)
 	}
 
-	execGitCommand([]string{"clone", "-c", "http.sslVerify=" + strconv.FormatBool(!request.Source.Insecure), "-o", "target", "-b", mr.TargetBranch, target.String(), destination})
+	execGitCommand([]string{"clone", "-c", "http.sslVerify=" + strconv.FormatBool(!request.Source.Insecure), "-o", "target", "-b", mr.SourceBranch, source.String(), destination})
 	os.Chdir(destination)
-	execGitCommand([]string{"remote", "add", "source", source.String()})
-	execGitCommand([]string{"remote", "update"})
-	execGitCommand([]string{"merge", "--no-ff", "--no-commit", mr.SHA})
+	// execGitCommand([]string{"remote", "add", "source", source.String()})
+	// execGitCommand([]string{"remote", "update"})
+	// execGitCommand([]string{"merge", "--no-ff", "--no-commit", mr.SHA})
 
 	notes, _ := json.Marshal(mr)
 	err = ioutil.WriteFile(".git/merge-request.json", notes, 0644)
