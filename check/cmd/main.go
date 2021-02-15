@@ -2,9 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/samcontesse/gitlab-merge-request-resource"
-	"github.com/samcontesse/gitlab-merge-request-resource/check"
-	"github.com/samcontesse/gitlab-merge-request-resource/common"
+	"github.com/orion0616/gitlab-merge-request-resource-1"
+	"github.com/orion0616/gitlab-merge-request-resource-1/check"
+	"github.com/orion0616/gitlab-merge-request-resource-1/common"
 	"github.com/xanzy/go-gitlab"
 	"os"
 	"strings"

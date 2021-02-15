@@ -1,8 +1,8 @@
 package out
 
 import (
-	"github.com/samcontesse/gitlab-merge-request-resource"
-	"github.com/samcontesse/gitlab-merge-request-resource/common"
+	"github.com/orion0616/gitlab-merge-request-resource-1"
+	"github.com/orion0616/gitlab-merge-request-resource-1/common"
 	"io/ioutil"
 	"path"
 	"strings"
